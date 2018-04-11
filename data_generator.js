@@ -42,9 +42,54 @@ var generateRandomTweet = function(){
   var tweet = {};
   tweet.user = randomElement(users);
   tweet.message = randomMessage();
-  tweet.created_at = new Date();
+  tweet.created_at = timeAndDate();
   addTweet(tweet);
 };
+
+//Set Timestamp
+var timeAndDate = function(){
+  var monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  var date = new Date();
+  var hour = date.getHours();
+  var minutes = String(date.getMinutes());
+  var day = String(date.getDate());
+  var month = String(monthName[date.getMonth()]);
+   
+
+    if(Number(minutes) < 10){
+      minutes = '0' + minutes;
+    }    
+
+    if(hour === 12){
+      return String(12) + ':' + minutes + 'pm ' + month + ' ' + day;	    
+    }else if(hour === 24){
+      return String(12) + ':' + minutes + 'am ' + month + ' ' + day;
+    }else if(hour > 12){
+      return String(hour - 12) + ':' + minutes + 'pm ' + month + ' ' + day;
+    }else{
+      return String(hour) + ':' + minutes + 'am ' + month + ' ' + day;
+    }
+}
+
+//Load Comments when button is clicked
+
+
+function loadComments(){
+  var $body = $('body');
+  var index = streams.home.length - 1;
+
+
+  while(index >= 0){
+    var tweet = streams.home[index];
+    var $tweet = $('<div></div>');
+    var tweetUser = $('<a href=\"tweet.user\"></a>')
+    $tweet.text('@' + tweet.user + ' (' + tweet.created_at  + ')' + ': ' + tweet.message);
+    $tweet.appendTo($('#mid_col'));
+    index -= 1;
+  }
+}
+
+
 
 for(var i = 0; i < 10; i++){
   generateRandomTweet();
@@ -67,3 +112,5 @@ var writeTweet = function(message){
   tweet.message = message;
   addTweet(tweet);
 };
+
+

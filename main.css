@@ -1,0 +1,50 @@
+
+
+
+
+body {
+  font-size: 1em;
+  font-family: sans-serif;
+}
+
+.header {
+  text-align: center;
+  width: auto;
+}
+
+h1 {
+  margin-bottom: -20px;
+}
+
+.column {
+  width: 23%;
+  height: auto;
+  margin: 10px;
+  padding: 10px;
+}
+
+#left_col {	
+  float: left;
+  background-color: blue;
+}
+
+#mid_col {
+  float: left;	
+  list-style-type: none;
+  margin: 10px;
+  height: auto;
+  padding: 10px;
+  background-color: red;
+  width: 47%;
+  text-align: center;
+  position: relative;
+}
+
+#right_col {
+  float: right;
+  background-color: green;
+}
+
+.username {
+  font-size: 2em;
+}
