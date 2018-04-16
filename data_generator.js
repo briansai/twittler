@@ -47,8 +47,10 @@ var generateRandomTweet = function(){
 };
 
 
+
+
 // set time stamp
-var timeAndDate = function(){
+function timeAndDate(){
   var monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
   var date = new Date();
   var hour = date.getHours();
@@ -74,7 +76,7 @@ var timeAndDate = function(){
 
 
 //Load tweets when button is clicked
-function loadComments(){
+function loadTweets(){
   
   var index = streams.home.length - 1;
   
@@ -90,16 +92,17 @@ function loadComments(){
 
     $link.appendTo($('.loadTweets'));
     $tweet.appendTo($('.loadTweets'));
-  
+    console.log(tweet); 
     index -= 1;
   }
   
 //load tweets that are specific to the person clicked
   (function(){
-    $('.douglascalhoun').on('click',  function(){
-       individualTweets('douglascalhoun');
+      
+    $('.douglascalhoun').on('click', function(){
        $('.twits').remove();
-       $('button').remove();
+       $('button').remove();     
+       individualTweets('douglascalhoun');
     });
 
     $('.shawndrost').on('click', function(){
@@ -119,36 +122,56 @@ function loadComments(){
        $('.twits').remove();
        $('button').remove();
     });
-
+ 
   })();
 }
 
 //retrieve individual tweets
 function individualTweets(tweeter){
   var user = streams.users;
-  var $twit = $('<div class="new"></div>');
   var filtered =[];
-
-
-  for(var key in user){
-    if(tweeter === key){
-      filtered.push(user[key]);
-    }
-  }
-
-
   var index = filtered.length - 1;
 
-  while(index >= 0){
-    var element = filtered[index];
-    for(var key in element){
+  for(var key in user){
+    if(tweeter === key){ 
+      var element = user[key];
+      for(var x = 0; x < element.length; x++){
+        filtered.push(element[x]);
+      }
+    }	
+  }
+
+  console.log(filtered); 
+
+  for(var x = 0; x < filtered.length; x++){
+    var $twit = $('<div class="new"></div>');
+    $twit.text('@' + filtered[x].user + '(' + filtered[x].created_at + '): ' + filtered[x].message);
+    $twit.appendTo('.loadTweets');
+    console.log(filtered[x].message);
+  }
+
+  /* while(index >= 0){
+      var sentence = filtered[index]; 
+      var $twit = $('<div class="new"></div>'); 
       //when console.logged, the text below works perfectly, however with twit.text, the output only produces one tweet. 
-      $twit.text('@' + element[key].user + '(' + element[key].created_at + '): ' + element[key].message);
-      $twit.appendTo($('.loadTweets'));
-    };
-  index -= 1;
-  };
+      //console.log('@' + sentence[key].user + '(' + sentence[key].created_at + ') :' + sentence[key].message);
+      $twit.text('@' + sentence.user + '(' + sentence.created_at + '): ' + sentence.message);
+      $twit.appendTo('.loadTweets');
+   index -= 1;  
+  };*/
 };
+
+
+//load tweets when button is clicked
+$(document).ready(function(){
+  $('.tweets').on('click', function(){
+    loadTweets();
+  });
+
+});
+
+
+
 
 
 
@@ -174,5 +197,4 @@ var writeTweet = function(message){
   tweet.message = message;
   addTweet(tweet);
 };
-
 
