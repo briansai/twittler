@@ -101,7 +101,6 @@ $(document).ready(function(){
   $('.tweets').on('click', function(){
     loadTweets();
   });
-
 });
 
 
@@ -114,7 +113,7 @@ function loadTweets(){
   
   while(index >= 0){
     var tweet = streams.home[index];
-    var $tweet = $('<div class="new twits">' + link + '</div>');
+    var $tweet = $('<div class="new twits"></div>');
     var link = '<a href=\"#\" class=\"' + tweet.user + ' twits\"></a>'
     var $link = $(link);	    
     
@@ -162,28 +161,41 @@ function loadTweets(){
 //retrieve individual tweets
 function individualTweets(tweeter){
   var user = streams.users;
-  var filtered =[];
-  var index = filtered.length - 1;
+  var store =[];
+  var link = '<a href=\"#\" class=\"' + tweeter + ' specific\"></a>'
+  var $link = $(link);	    
 
+  $link.text('@' + tweeter);
+  $link.appendTo('header');
+  
   for(var key in user){
     if(tweeter === key){ 
       var element = user[key];
       for(var x = 0; x < element.length; x++){
-        filtered.push(element[x]);
+        store.push(element[x]);
       }
     }	
-  }
+  }	
 
-  
-
-  for(var x = filtered.length - 1; x >= 0; x--){
-    var userTweets = filtered[x];
+  for(var x = store.length - 1; x >= 0; x--){
+    var userTweets = store[x];
     var $twit = $('<div class="new"></div>');
     $twit.text('@' + userTweets.user + '(' + userTweets.created_at + '): ' + userTweets.message);
     $twit.appendTo('.loadTweets');
   }
 
+
+  $(document).ready(function(){	
+    $('.specific').on('click', function(){
+      $('.specific').remove();	
+      individualTweets(tweeter);        
+    });
+  });
+
 };
+
+
+
 
 
 
