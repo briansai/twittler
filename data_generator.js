@@ -46,10 +46,31 @@ var generateRandomTweet = function(){
   addTweet(tweet);
 };
 
+for(var i = 0; i < 10; i++){
+  generateRandomTweet();
+}
 
+var scheduleNextTweet = function(){
+  generateRandomTweet();
+  setTimeout(scheduleNextTweet, Math.random() * 1500);
+};
+scheduleNextTweet();
 
+// utility function for letting students add "write a tweet" functionality
+// (note: not used by the rest of this file.)
+var writeTweet = function(message){
+  if(!visitor){
+    throw new Error('set the global visitor property!');
+  }
+  var tweet = {};
+  tweet.user = visitor;
+  tweet.message = message;
+  addTweet(tweet);
+};
 
-// set time stamp
+//--------------------------------------------------------Brian's Codes----------------------------------------------------------------------
+
+// Set time stamp
 function timeAndDate(){
   var monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
   var date = new Date();
@@ -57,16 +78,16 @@ function timeAndDate(){
   var minutes = String(date.getMinutes());
   var day = String(date.getDate());
   var month = String(monthName[date.getMonth()]);
-   
+  var twelve = String(12); 
 
     if(Number(minutes) < 10){
       minutes = '0' + minutes;
     }    
 
     if(hour === 12){
-      return String(12) + ':' + minutes + 'pm ' + month + ' ' + day;        
+      return twelve + ':' + minutes + 'pm ' + month + ' ' + day;        
     }else if(hour === 24){
-      return String(12) + ':' + minutes + 'am ' + month + ' ' + day;
+      return twelve + ':' + minutes + 'am ' + month + ' ' + day;
     }else if(hour > 12){
       return String(hour - 12) + ':' + minutes + 'pm ' + month + ' ' + day;
     }else{
@@ -75,28 +96,40 @@ function timeAndDate(){
 }
 
 
-//Load tweets when button is clicked
+//Load tweets when 'VIEW TWEETS' button is clicked
+$(document).ready(function(){
+  $('.tweets').on('click', function(){
+    loadTweets();
+  });
+
+});
+
+
+
+
+//Function that loads all tweets when 'VIEW TWEETS' button is clicked
 function loadTweets(){
   
   var index = streams.home.length - 1;
   
   while(index >= 0){
     var tweet = streams.home[index];
-    var $tweet = $('<div class="new twits"></div>');
+    var $tweet = $('<div class="new twits">' + link + '</div>');
     var link = '<a href=\"#\" class=\"' + tweet.user + ' twits\"></a>'
     var $link = $(link);	    
-
+    
 
     $link.text('@' + tweet.user);
     $tweet.text(' (' + tweet.created_at + ') ' + ': ' + tweet.message);
 
     $link.appendTo($('.loadTweets'));
     $tweet.appendTo($('.loadTweets'));
-    console.log(tweet); 
+    
     index -= 1;
   }
   
-//load tweets that are specific to the person clicked
+
+//Load tweets that are specific to the person clicked
   (function(){
       
     $('.douglascalhoun').on('click', function(){
@@ -141,60 +174,21 @@ function individualTweets(tweeter){
     }	
   }
 
-  console.log(filtered); 
+  
 
-  for(var x = 0; x < filtered.length; x++){
+  for(var x = filtered.length - 1; x >= 0; x--){
+    var userTweets = filtered[x];
     var $twit = $('<div class="new"></div>');
-    $twit.text('@' + filtered[x].user + '(' + filtered[x].created_at + '): ' + filtered[x].message);
+    $twit.text('@' + userTweets.user + '(' + userTweets.created_at + '): ' + userTweets.message);
     $twit.appendTo('.loadTweets');
-    console.log(filtered[x].message);
   }
 
-  /* while(index >= 0){
-      var sentence = filtered[index]; 
-      var $twit = $('<div class="new"></div>'); 
-      //when console.logged, the text below works perfectly, however with twit.text, the output only produces one tweet. 
-      //console.log('@' + sentence[key].user + '(' + sentence[key].created_at + ') :' + sentence[key].message);
-      $twit.text('@' + sentence.user + '(' + sentence.created_at + '): ' + sentence.message);
-      $twit.appendTo('.loadTweets');
-   index -= 1;  
-  };*/
 };
 
 
-//load tweets when button is clicked
-$(document).ready(function(){
-  $('.tweets').on('click', function(){
-    loadTweets();
-  });
-
-});
 
 
 
 
 
-
-
-for(var i = 0; i < 10; i++){
-  generateRandomTweet();
-}
-
-var scheduleNextTweet = function(){
-  generateRandomTweet();
-  setTimeout(scheduleNextTweet, Math.random() * 1500);
-};
-scheduleNextTweet();
-
-// utility function for letting students add "write a tweet" functionality
-// (note: not used by the rest of this file.)
-var writeTweet = function(message){
-  if(!visitor){
-    throw new Error('set the global visitor property!');
-  }
-  var tweet = {};
-  tweet.user = visitor;
-  tweet.message = message;
-  addTweet(tweet);
-};
 
