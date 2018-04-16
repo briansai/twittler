@@ -1,21 +1,26 @@
 
 
-
+/*type*/
 
 body {
-  font-size: 1em;
+  font-size: medium;
   font-family: sans-serif;
-
+  background-color: LightGray;
 }
 
-
-.header {
+header {
   text-align: center;
   width: auto;
+  padding-right: 1%; 
 }
 
 h1 {
   margin-bottom: -20px;
+}
+
+ul {
+  margin-top: 2%;
+  margin-bottom: 0;
 }
 
 li {
@@ -26,20 +31,37 @@ footer {
   text-align: center;
   width: auto;
   font-weight: bold;
+  padding-right: 1%;
 }
 
-.new {
-  padding-bottom: 20px;
-  padding-left: 12%;
-  border-style: outset;
-  margin: 1%;
-  margin-right: 20%;
-  margin-left: 8%;
+
+button {
+  font-size: medium;
+  background-color: green;
+  font: sans-serif;
+  font-color: white;
+  font-weight: bold;
 }
 
 a {
-  padding-left: 10%;
+  margin: 1%;
 }
+
+/*class*/
+
+
+
+
+
+.new {
+  padding-top: 2%;
+  padding-bottom: 20px;
+  padding-left: 12%;
+  border-style: outset;
+  margin: 1% 15% 2% 12%;
+  background-color: white;
+}
+
 
 .tweets {
   text-align: center;
@@ -48,15 +70,21 @@ a {
   width: auto; 
 }
 
-button {
-  font-size: 1em;
-  background-color: green;
-  font: sans-serif;
-  font-color: white;
-  font-weight: bold;
-}
 
 .twits {
-  font-size: 1em;
+  font-size: medium;
   font: sans-serif;
+  margin-left: 10%;
+  padding-left: 2%;
 }
+
+.specific {
+  font-size: x-large;
+  font-size: sans-serif;
+  margin-bottom: 1%;
+  padding-left: 5%;
+  padding-right: 55%;
+
+}
+
+
