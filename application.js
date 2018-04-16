@@ -3,9 +3,7 @@ $(document).ready(function(){
   $('.view').on('click', function(){
     loadComments();
   });	
-
-  //Event listener to remove the tweets and re-add new tweet
-  	
 });
+
 
 
