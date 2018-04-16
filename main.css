@@ -7,6 +7,7 @@ body {
   font-family: sans-serif;
 }
 
+
 .header {
   text-align: center;
   width: auto;
@@ -16,35 +17,40 @@ h1 {
   margin-bottom: -20px;
 }
 
-.column {
-  width: 23%;
-  height: auto;
-  margin: 10px;
-  padding: 10px;
-}
-
-#left_col {	
-  float: left;
-  background-color: blue;
-}
-
-#mid_col {
-  float: left;	
+li {
   list-style-type: none;
-  margin: 10px;
-  height: auto;
-  padding: 10px;
-  background-color: red;
-  width: 47%;
+}
+
+footer {
   text-align: center;
-  position: relative;
+  width: auto;
+  font-weight: bold;
 }
 
-#right_col {
-  float: right;
+.new {
+  padding-bottom: 20px;
+  padding-left: 12%;
+  border-style: outset;
+  margin: 1%;
+  margin-right: 20%;
+  margin-left: 8%;
+}
+
+a {
+  padding-left: 10%;
+}
+
+.tweets {
+  text-align: center;
+  padding-right: 4%;  
+  padding-bottom: 1%;
+  width: auto; 
+}
+
+button {
+  font-size: 1em;
   background-color: green;
-}
-
-.username {
-  font-size: 2em;
+  font: sans-serif;
+  font-color: white
+  font-weight: bold;
 }

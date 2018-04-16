@@ -46,7 +46,8 @@ var generateRandomTweet = function(){
   addTweet(tweet);
 };
 
-//Set Timestamp
+
+// set time stamp
 var timeAndDate = function(){
   var monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
   var date = new Date();
@@ -61,7 +62,7 @@ var timeAndDate = function(){
     }    
 
     if(hour === 12){
-      return String(12) + ':' + minutes + 'pm ' + month + ' ' + day;	    
+      return String(12) + ':' + minutes + 'pm ' + month + ' ' + day;        
     }else if(hour === 24){
       return String(12) + ':' + minutes + 'am ' + month + ' ' + day;
     }else if(hour > 12){
@@ -71,23 +72,97 @@ var timeAndDate = function(){
     }
 }
 
+
 //Load Comments when button is clicked
+
 
 
 function loadComments(){
   var $body = $('body');
   var index = streams.home.length - 1;
-
-
+  var user = streams.users;
+  
   while(index >= 0){
     var tweet = streams.home[index];
-    var $tweet = $('<div></div>');
-    var tweetUser = $('<a href=\"tweet.user\"></a>')
-    $tweet.text('@' + tweet.user + ' (' + tweet.created_at  + ')' + ': ' + tweet.message);
-    $tweet.appendTo($('#mid_col'));
+    var $tweet = $('<div class="new twits"></div>');
+    var link = '<a href=\"#\" class=\"' + tweet.user + ' twits\"></a>'
+    var $link = $(link);	    
+
+
+    $link.text('@' + tweet.user);
+    $tweet.text(' (' + tweet.created_at + ') ' + ': ' + tweet.message);
+
+    $link.appendTo($('#loadTweets'));
+    $tweet.appendTo($('#loadTweets'));
+  
     index -= 1;
   }
-}
+  
+  
+  (function(){
+    $('.twits').on('click', function(){
+        individualTweets('douglascalhoun');
+        $('.twits').remove();
+      });
+  
+
+  /*  $('.shawndrost').on('click', function(){
+      individualTweets('shawndrost');
+      $('.twits').remove();
+    });
+ 
+    $('mracus').on('click', function(){
+      individualTweets('mracus');
+      $('.twits').remove();
+    });
+
+    $('sharksforcheap').on('click', function(){
+      individualTweets('sharksforcheap');
+      $('.twits').remove();
+    });*/
+  })();
+}  
+
+
+function individualTweets(tweeter){
+  var user = streams.users;
+  var $twit = $('<div class="new"></div>');
+  var filtered =[];
+  var mapped = [];
+
+
+  for(var key in user){
+    if(tweeter === key){
+      filtered.push(user[key]);
+    }
+  }
+  
+  var index = filtered.length - 1;
+
+  while(index >= 0){
+    var element = filtered[index];
+    for(var key in element){
+      $twit.text('@' + element[key].user + '(' + element[key].created_at + ')' + ':' + element[key].message);
+      $twit.appendTo('#loadTweets');
+    }
+  index -= 1
+  }
+return mapped;
+
+/*  for(var x = 0; x < filtered.length; x++){
+    var element = filtered[x];
+    for(var key in element){
+      
+      $twit.text('@' + element[key].`user + '(' + element[key].created_at + ')' + ':' + element[key].message);
+      $twit.appendTo('#loadTweets');
+    };
+  };*/
+};
+
+
+
+
+
 
 
 

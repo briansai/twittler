@@ -1,11 +1,11 @@
 $(document).ready(function(){
-  $('.comments').on('click', function(){
-    $(this).append(loadComments());    
-  });
+  //Event listener for loading tweets
+  $('.view').on('click', function(){
+    loadComments();
+  });	
+
+  //Event listener to remove the tweets and re-add new tweet
+  	
 });
 
-$(document).ready(function(){
-  $('.username').on('click', function(){
-    $(this).append(userName());
-  });
-});
+
