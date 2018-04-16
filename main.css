@@ -52,8 +52,11 @@ button {
   font-size: 1em;
   background-color: green;
   font: sans-serif;
-  font-color: white
+  font-color: white;
   font-weight: bold;
 }
 
-
+.twits {
+  font-size: 1em;
+  font: sans-serif;
+}
